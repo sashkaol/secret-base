@@ -1,28 +1,49 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div class="form">
+      <Form />
+    </div>
+    <!-- <Button text="CLose" /> -->
+    <div class="r">
+      <Button text="settings" />
+    </div>
+    {{info}}
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import Button from "./components/Button.vue";
+//import Case from "./components/Case.vue";
+import Form from "./components/Form.vue";
+import axios from 'axios';
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    Button,
+    Form,
+    //Case
+  },
+  data() {
+    return {
+      info: null
+    }
+  },
+  mounted() {
+    axios
+      .get('/people')
+      .then(res => (this.info = res))
+  },
+};
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style lang="scss">
+body {
+  margin: 0;
+  padding: 0;
+  background: rgba(29, 45, 69, 1);
+  .r {
+    width: 100px;
+    height: 100px;
+  }
 }
 </style>
